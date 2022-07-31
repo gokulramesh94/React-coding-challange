@@ -8,7 +8,7 @@ import { STRING_CONSTANTS } from '../constants/string.constant';
  * */
 
 const API_BASE_URL =
-  STRING_CONSTANTS?.NEXT_PUBLIC_API_BASE_URL || 'https://api.unsplash.com';
+  STRING_CONSTANTS?.API_BASE_URL || 'https://api.unsplash.com';
 
 export const Axios = axios.create({
   baseURL: API_BASE_URL

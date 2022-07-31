@@ -12,18 +12,20 @@ export default function Home() {
   const [pageNo, setPageNo] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
+  const [allImagesLoaded, setAllImagesLoaded] = useState(false);
 
   const { modalstate, handleModalOpen, handleModalClose } = useModal(false);
 
   useEffect(() => {
-    const throttledScroll = _.throttle(handleScroll, 500);
-    fetchImages();
-    window.addEventListener('scroll', throttledScroll);
-    return () => window.removeEventListener('scroll', throttledScroll);
+    if (!allImagesLoaded) {
+      const throttledScroll = _.throttle(handleScroll, 500);
+      window.addEventListener('scroll', throttledScroll);
+      return () => window.removeEventListener('scroll', throttledScroll);
+    }
   }, []);
 
   useEffect(() => {
-    fetchImages();
+    if (!allImagesLoaded) fetchImages();
   }, [pageNo]);
 
   const handleScroll = () => {
@@ -41,9 +43,13 @@ export default function Home() {
     setIsLoading(true);
     ImageService.fetchImageList(pageNo)
       .then((response) => {
-        setImageList(() => {
-          return [...imageList, ...response];
-        });
+        if (response.length === 0) {
+          setAllImagesLoaded(true);
+        } else {
+          setImageList(() => {
+            return [...imageList, ...response];
+          });
+        }
         setIsLoading(false);
       })
       .catch((error) => {
