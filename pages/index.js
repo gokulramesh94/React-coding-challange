@@ -1,19 +1,22 @@
-import { useEffect, useState } from 'react';
+import { memo, useEffect, useState } from 'react';
 import _ from 'lodash';
 import Head from 'next/head';
+import IconButton from '@mui/material/IconButton';
 import Image from '../components/Image/Image';
 import List from '../components/List/List';
 import Modal from '../components/Modal/Modal';
 import ImageService from '../services/image.service';
 import { useModal } from '../hooks';
+import { theme } from '../helpers/theme.helper';
 
-export default function Home() {
+const Home = () => {
   const [imageList, setImageList] = useState([]);
   const [pageNo, setPageNo] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
   const [allImagesLoaded, setAllImagesLoaded] = useState(false);
 
+  const { mobileScreen, tabScreen } = theme();
   const { modalstate, handleModalOpen, handleModalClose } = useModal(false);
 
   useEffect(() => {
@@ -74,7 +77,11 @@ export default function Home() {
       <List data={imageList} viewItem={(image) => handleSelectedImage(image)} />
       {modalstate ? (
         <Modal modalstate={modalstate} handleModalClose={handleModalClose}>
-          <div className="modal-content-wrapper">
+          <div
+            className={`modal-content-wrapper ${
+              !tabScreen || !mobileScreen ? 'mobile' : ''
+            }`}
+          >
             <div className="image-wrapper">
               <Image
                 source={selectedImage?.urls?.regular}
@@ -84,7 +91,29 @@ export default function Home() {
               />
             </div>
             <div className="details">
+              <div className="close-button">
+                <IconButton onClick={handleModalClose}>X</IconButton>
+              </div>
               <div className="title">{selectedImage?.user?.username}</div>
+              <div className="bio">{selectedImage?.user?.bio}</div>
+              <div className="personal-details">
+                {selectedImage?.user?.name ? <b>Name : </b> : null}
+                {selectedImage?.user?.name}
+              </div>
+              <div className="personal-details">
+                {selectedImage?.user?.social?.instagram_username ? (
+                  <b>Instagram Username : </b>
+                ) : null}
+                {selectedImage?.user?.social?.instagram_username}
+              </div>
+              <div className="personal-details">
+                {selectedImage?.user?.social?.portfolio_url ? (
+                  <b>Portfolio : </b>
+                ) : null}
+                <a href={selectedImage?.user?.social?.portfolio_url}>
+                  {selectedImage?.user?.social?.portfolio_url}
+                </a>
+              </div>
             </div>
           </div>
         </Modal>
@@ -92,4 +121,6 @@ export default function Home() {
       {isLoading ? <div className="loading">Loading more images...</div> : null}
     </div>
   );
-}
+};
+
+export default memo(Home);
