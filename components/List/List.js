@@ -3,23 +3,11 @@ import PropTypes from 'prop-types';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import ImageListItemBar from '@mui/material/ImageListItemBar';
-import { createTheme } from '@mui/material/styles';
-import useMediaQuery from '@mui/material/useMediaQuery';
 import Image from '../Image/Image';
+import { theme } from '../../helpers/theme.helper';
 
 const List = ({ data, viewItem }) => {
-  const theme = createTheme({
-    breakpoints: {
-      values: {
-        sm: 500,
-        md: 700
-      }
-    }
-  });
-
-  const mobileScreen = useMediaQuery(theme.breakpoints.up('sm'));
-  const tabScreen = useMediaQuery(theme.breakpoints.up('md'));
-
+  const { mobileScreen, tabScreen } = theme();
   const renderListItems = () => {
     let imageList = [];
     data.map((image, index) =>
