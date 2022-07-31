@@ -3,12 +3,17 @@ import _ from 'lodash';
 import Head from 'next/head';
 import Image from '../components/Image/Image';
 import List from '../components/List/List';
+import Modal from '../components/Modal/Modal';
 import ImageService from '../services/image.service';
+import { useModal } from '../hooks';
 
 export default function Home() {
   const [imageList, setImageList] = useState([]);
   const [pageNo, setPageNo] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
+  const [selectedImage, setSelectedImage] = useState(null);
+
+  const { modalstate, handleModalOpen, handleModalClose } = useModal(false);
 
   useEffect(() => {
     const throttledScroll = _.throttle(handleScroll, 500);
@@ -47,6 +52,12 @@ export default function Home() {
       });
   };
 
+  const handleSelectedImage = (image) => {
+    console.log('selected image : ', image);
+    handleModalOpen();
+    setSelectedImage(image);
+  };
+
   return (
     <div>
       <Head>
@@ -55,6 +66,23 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <List data={imageList} viewItem={(image) => handleSelectedImage(image)} />
+      {modalstate ? (
+        <Modal modalstate={modalstate} handleModalClose={handleModalClose}>
+          <div className="modal-content-wrapper">
+            <div className="image-wrapper">
+              <Image
+                source={selectedImage?.urls?.regular}
+                sourceset={selectedImage?.urls?.regular}
+                altText={selectedImage?.user?.username}
+                loading="lazy"
+              />
+            </div>
+            <div className="details">
+              <div className="title">{selectedImage?.user?.username}</div>
+            </div>
+          </div>
+        </Modal>
+      ) : null}
       {isLoading ? <div className="loading">Loading more images...</div> : null}
     </div>
   );
