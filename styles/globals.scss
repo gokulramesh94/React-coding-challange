@@ -1,0 +1,57 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+@media (prefers-color-scheme: dark) {
+  html {
+    color-scheme: dark;
+  }
+  body {
+    color: white;
+    background: black;
+  }
+}
+
+@import './image.scss';
+@import './list.scss';
+
+.MuiModal-root {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .modal-content-wrapper {
+    width: 90%;
+    height: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .image-wrapper {
+      height: 100%;
+      width: 50%;
+      img {
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+    .details {
+      width: 50%;
+      height: 100%;
+      background-color: rgb(29, 35, 42);
+      color: rgb(159, 165, 171);
+      padding: 2rem;
+    }
+  }
+}
