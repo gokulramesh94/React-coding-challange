@@ -8,7 +8,7 @@ import { STRING_CONSTANTS } from '../constants/string.constant';
  * */
 
 const API_BASE_URL =
-  STRING_CONSTANTS?.API_BASE_URL ||
+  STRING_CONSTANTS?.NEXT_PUBLIC_API_BASE_URL ||
   'https://react-challenge-photo-grid-api.herokuapp.com/api';
 
 export const Axios = axios.create({
