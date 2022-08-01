@@ -1,0 +1,97 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+@media (prefers-color-scheme: dark) {
+  html {
+    color-scheme: dark;
+  }
+  body {
+    color: white;
+    background: black;
+  }
+}
+
+@import './image.scss';
+@import './list.scss';
+
+.MuiModal-root {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .modal-content-wrapper {
+    width: 75%;
+    height: 75%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .image-wrapper {
+      height: 100%;
+      width: 50%;
+      img {
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+    .details {
+      width: 50%;
+      height: 100%;
+      background-color: rgb(29, 35, 42);
+      color: rgb(159, 165, 171);
+      padding: 2rem;
+      position: relative;
+      .close-button {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        button {
+          color: #fff;
+        }
+      }
+      .title {
+        margin: 2rem 0;
+        font-size: 1.75rem;
+        font-weight: 500;
+        text-transform: capitalize;
+      }
+      .sub-heading {
+        margin: 2rem 0;
+        font-size: 1.15rem;
+        font-weight: 500;
+        text-transform: capitalize;
+      }
+      .bio {
+        margin: 1rem 0;
+      }
+      .personal-details {
+        margin: 0.5rem 0;
+        a {
+          text-decoration: underline;
+        }
+      }
+    }
+    &.mobile {
+      flex-direction: column;
+      .image-wrapper {
+        width: 100%;
+      }
+      .details {
+        width: 100%;
+        padding: 2rem;
+      }
+    }
+  }
+}

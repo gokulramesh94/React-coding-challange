@@ -1,0 +1,16 @@
+.no-images {
+  text-align: center;
+  padding: 3rem;
+  font-size: 2rem;
+}
+.loading {
+  text-align: center;
+  padding: 3rem;
+  font-size: 1.2rem;
+  color: #989898;
+}
+ul.MuiImageList-root {
+  li.MuiImageListItem-root {
+    cursor: pointer;
+  }
+}
