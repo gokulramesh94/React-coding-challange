@@ -1,10 +1,9 @@
-## Live Url
+<h1 align="center">PHOTO GRID</h1>
+<h2 align="center">FRONT_END</h2>
 
-<a href="https://react-coding-challange-three.vercel.app/">Photo Grid</a>
+Live URL - <a href="https://react-coding-challange-three.vercel.app/">Photo Grid</a>
 
-#### API Server Repo
-
-[photo-grid-api](https://github.com/gokulramesh94/photo-grid-api)
+API Server Repo - [photo-grid-api](https://github.com/gokulramesh94/photo-grid-api)
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
